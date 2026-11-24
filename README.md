@@ -10,7 +10,7 @@ Built with **[Flux DS](https://github.com/cubillowork/flux-ds)** (`flux-ds` v0.3
 
 - [x] Workspace switcher — tap the title (Installs ▾)
 - [x] Installs — Home (systems overview, alerts, Begin installation), Systems (Gen 2 / Gen 1), Support, Warranty
-- [x] Mobile menu (☰) — account, partner program, QR, language, user management, notifications, about, cache, log out
+- [x] Mobile menu (☰) — account, QR, language, user management, notifications, about, cache, log out
 - [x] New installation — product choice + training check before commissioning X5 / W10
 - [x] Register warranty — form with prefilled serial number
 - [x] System detail — overview, devices, alerts

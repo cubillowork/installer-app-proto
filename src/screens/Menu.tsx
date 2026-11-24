@@ -23,7 +23,6 @@ export function Menu({ nav }: { nav: Nav }) {
         <div className="page me">
           <div className="me__list">
             <MenuRow icon="Person_user" title="My account" description="Change your name, email or password" />
-            <MenuRow icon="contract" title="Partner program" description="Tier, benefits, certification" onClick={() => nav.go('partner', 'overview')} />
             <MenuRow icon="Full screen" title="Scan QR code" />
             <MenuRow icon="News" title="Language" description="Select your preferred app language" />
             <MenuRow icon="Two persons_user" title="User management" description="Invite users, roles & permissions" />
