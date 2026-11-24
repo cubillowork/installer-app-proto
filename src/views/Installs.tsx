@@ -84,9 +84,9 @@ function Home({ nav }: { nav: Nav }) {
           </div>
           <SystemsBar />
           <div className="legend">
-            <div><span className="p1-semibold muted">{o.normal}</span><StatusDot tone="success">Normal</StatusDot></div>
-            <div><span className="p1-semibold muted">{o.alerts}</span><StatusDot tone="error">Alerts</StatusDot></div>
-            <div><span className="p1-semibold muted">{o.offline}</span><StatusDot tone="neutral">Offline</StatusDot></div>
+            <div><span className="p1-semibold">{o.normal}</span><StatusDot tone="success">Normal</StatusDot></div>
+            <div><span className="p1-semibold">{o.alerts}</span><StatusDot tone="error">Alerts</StatusDot></div>
+            <div><span className="p1-semibold">{o.offline}</span><StatusDot tone="neutral">Offline</StatusDot></div>
           </div>
         </CardBody>
       </Card>

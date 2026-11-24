@@ -1,0 +1,85 @@
+/* =====================================================================
+   Visual polish layer — professional UI rules applied on top of Flux.
+   Every value is a Flux token; the few exceptions are commented.
+   ===================================================================== */
+
+/* 1. One surface language: every card uses the same radius (radius/md, 8px),
+      the same shadow and white background. */
+.flux-card,
+.system-card,
+.notif,
+.alert-card,
+.contact-card,
+.tier-card,
+.card-plain,
+.system__mode {
+  border-radius: var(--radius-md);
+}
+.thumb { border-radius: var(--radius-sm); }
+.thumb--big { border-radius: 0; }
+
+/* 2. Numbers: tabular figures so values line up and don't jump when they change. */
+.big-number, .legend, .alerts-legend, .donut, .reading, .system__totals, .system__battery,
+.tier-card__pct, .notif__top, .alert-card__rows, .flux-stepper__value, .system-card__info {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 3. Text: balanced titles, no orphans in descriptions, readable minimum line length. */
+h1, h2, h3, .p2-semibold, .p3-semibold, .h4, .h5 { text-wrap: balance; }
+p, .p4-regular, .p5-regular { text-wrap: pretty; }
+
+/* 4. Hierarchy: secondary text always uses text/secondary; values and titles text/primary. */
+.muted, .flux-list-item__description, .flux-nav-item__description { color: var(--color-text-secondary); }
+
+/* 5. Feedback: everything tappable reacts on press (no browser grey flash). */
+.phone * { -webkit-tap-highlight-color: transparent; }
+.flux-card.is-clickable,
+.system-card,
+.notif.is-clickable,
+.me-row,
+.flux-nav-item,
+.flux-card-header.is-clickable,
+.tier-card {
+  transition: transform 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+.flux-card.is-clickable:active,
+.system-card:active,
+.notif.is-clickable:active,
+.tier-card:active { transform: scale(0.985); }
+.me-row:active, .flux-nav-item:active, .flux-card-header.is-clickable:active { opacity: 0.6; }
+
+/* 6. Accessibility: visible keyboard focus on every interactive element. */
+.system-card:focus-visible,
+.notif.is-clickable:focus-visible,
+.me-row:focus-visible,
+.flux-nav-item:focus-visible,
+.flux-card.is-clickable:focus-visible,
+.flux-card-header.is-clickable:focus-visible,
+.flux-bottom-nav__item:focus-visible,
+.tier-card:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* 7. Touch targets ≥ 44px: header icons keep their 24px look but get a 44px hit area. */
+.header-action { padding: 10px; margin: -10px; }
+.flux-app-header__actions { gap: var(--spacing-lg); }
+
+/* 8. Horizontal scrollers run to the screen edge (content still aligned at 24px). */
+.page > .flux-chip-group {
+  margin: 0 calc(var(--spacing-xl) * -1);
+  padding: 0 var(--spacing-xl);
+  scroll-padding: 0 var(--spacing-xl);
+}
+
+/* 9. Calm chrome: bottom bar separated by a hairline + soft shadow instead of a hard border. */
+.screen .flux-bottom-nav {
+  border-top: 1px solid var(--color-border-subtle);
+  box-shadow: 0 -2px 8px rgb(0 0 0 / 0.03); /* exception: softer than any Flux elevation */
+}
+
+/* 10. Card headers: same hairline as list separators. */
+.flux-card-header { border-bottom-color: var(--color-border-subtle); }
+
+/* 11. Status colour only for status; brand blue only for actions and current state. */
+.legend .p1-semibold, .alerts-legend .p1-semibold { color: var(--color-text-primary); }

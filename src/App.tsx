@@ -12,6 +12,7 @@ import { Notifications } from './screens/Notifications';
 import { AlertDetail } from './screens/AlertDetail';
 import { SafeArea, StatusBar } from './StatusBar';
 import './App.css';
+import './polish.css';
 
 // ---------- Workspaces (workspace switcher) and their bottom bars ----------
 export type View = 'installs' | 'academy' | 'partner' | 'buy';
