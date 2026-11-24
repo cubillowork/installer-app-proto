@@ -223,3 +223,9 @@
 .workspace-switcher .flux-nav-item__content { gap: 2px; }
 .workspace-switcher .flux-nav-item__content .p2-semibold { font-size: 15px; line-height: 19px; }
 .workspace-switcher .flux-nav-item__description { font-size: 12px; line-height: 15px; }
+
+/* Root screens: status bar and header sit on the app background (no white band).
+   Task/detail screens keep a white status bar to match their white Header mobile. */
+.status-bar { background: transparent; }
+.screen .flux-app-header { background: transparent; }
+.phone:has(.flux-header-mobile) .status-bar { background: var(--color-background-default); }
