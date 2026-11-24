@@ -162,3 +162,24 @@
 .workspace-switcher .flux-nav-item__icon { border-radius: 2px; background: var(--color-background-strong); color: var(--color-text-primary); }
 .workspace-switcher .flux-nav-item.is-selected .flux-nav-item__icon { background: var(--color-neutral-900); color: var(--color-text-white); }
 .workspace-switcher .flux-nav-item__description { font-size: 13px; line-height: 16px; }
+
+/* Me (Installs) — white page, rows: icon 24 · title p2 semibold · description p5 · arrow 16, gap 32 */
+.content:has(.me) { background: var(--color-background-default); }
+.me { gap: var(--spacing-2xl); }
+.me__hello { text-align: center; }
+.me__list { display: flex; flex-direction: column; gap: var(--spacing-2xl); }
+.me-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  text-align: left;
+  cursor: pointer;
+}
+.me-row__text { flex: 1; display: flex; flex-direction: column; }
+.me__divider { width: 100%; margin: 0; border: none; border-top: 1px solid var(--color-border-default); }

@@ -1,6 +1,7 @@
 import {
   Button, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, NavItem, SearchField, SectionHeader, StatusDot, Tag,
 } from 'flux-ds';
+import type { IconName } from 'flux-ds';
 import type { Nav } from '../App';
 import { pendingWarranties, registrations, systems, systemsOverview as o } from '../data';
 
@@ -174,19 +175,33 @@ function Warranty({ nav }: { nav: Nav }) {
   );
 }
 
+/** Me — as in today's Installer App (Figma 🛠️ Installer App, node 7549:11177). */
+function MeRow({ icon, title, description, chevron = true }: { icon: IconName; title: string; description?: string; chevron?: boolean }) {
+  return (
+    <button type="button" className="me-row">
+      <Icon name={icon} />
+      <span className="me-row__text">
+        <span className="p2-semibold">{title}</span>
+        {description && <span className="p5-regular">{description}</span>}
+      </span>
+      {chevron && <Icon name="Arrow right" size={16} />}
+    </button>
+  );
+}
+
 function Me() {
   return (
-    <div className="page">
-      <Card padding="md">
-        <ListItem icon="Person_installer" title="Xin Wang" description="Installer · Giro Installers" />
-      </Card>
-      <Card padding="md">
-        <NavItem icon="Person_user" title="Profile" description="Personal and company information" />
-        <NavItem icon="Two persons_user" title="User management" description="Invite users, roles and permissions" />
-        <NavItem icon="Lock" title="Change password" />
-        <NavItem icon="Language" title="Language" description="English" />
-        <NavItem icon="Information" title="About" description="Version 3.0 · prototype" />
-      </Card>
+    <div className="page me">
+      <h2 className="p2-semibold me__hello">Hello, Xin</h2>
+      <div className="me__list">
+        <MeRow icon="Person_user" title="My account" description="Change your name, email or password" />
+        <MeRow icon="Full screen" title="Scan QR code" />
+        <MeRow icon="News" title="Language" description="Select your preferred app language" />
+        <MeRow icon="Information" title="About" description="Privacy policy, Terms of use agreement" />
+        <MeRow icon="Refresh | Reload" title="Clear cache" />
+        <hr className="me__divider" />
+        <MeRow icon="Logout" title="Log out" chevron={false} />
+      </div>
     </div>
   );
 }
