@@ -8,6 +8,8 @@ import { NewInstallation } from './screens/NewInstallation';
 import { RegisterWarranty } from './screens/RegisterWarranty';
 import { SystemDetail } from './screens/SystemDetail';
 import { Menu } from './screens/Menu';
+import { Notifications } from './screens/Notifications';
+import { AlertDetail } from './screens/AlertDetail';
 import { SafeArea, StatusBar } from './StatusBar';
 import './App.css';
 
@@ -46,7 +48,7 @@ const tabs = {
 } satisfies Record<View, BottomNavItem<string>[]>;
 
 // ---------- Screens pushed on top of a view ----------
-export type Screen = { name: 'menu' } | { name: 'new-installation' } | { name: 'register-warranty'; owner?: string } | { name: 'system'; id: string };
+export type Screen = { name: 'menu' } | { name: 'notifications' } | { name: 'alert'; id: string } | { name: 'new-installation' } | { name: 'register-warranty'; owner?: string } | { name: 'system'; id: string };
 
 export type Nav = {
   go: (view: View, tab?: string) => void;
@@ -55,10 +57,11 @@ export type Nav = {
 };
 
 /** Header icon, 24×24 as in Figma (Flux IconButton is 20×20 with an 18px icon). */
-function HeaderAction({ icon, label, onClick }: { icon: IconName; label: string; onClick?: () => void }) {
+function HeaderAction({ icon, label, onClick, badge }: { icon: IconName; label: string; onClick?: () => void; badge?: boolean }) {
   return (
     <button type="button" className="header-action" aria-label={label} title={label} onClick={onClick}>
       <Icon name={icon} size={24} />
+      {badge && <span className="header-action__badge" />}
     </button>
   );
 }
@@ -96,6 +99,8 @@ export default function App() {
             {screen.name === 'register-warranty' && <RegisterWarranty nav={nav} owner={screen.owner} />}
             {screen.name === 'system' && <SystemDetail nav={nav} id={screen.id} />}
             {screen.name === 'menu' && <Menu nav={nav} />}
+            {screen.name === 'notifications' && <Notifications nav={nav} />}
+            {screen.name === 'alert' && <AlertDetail nav={nav} />}
           </div>
         ) : (
           // Root screens: App header with the workspace switcher + the workspace bottom bar
@@ -106,7 +111,7 @@ export default function App() {
               switcherOpen={switcher}
               actions={
                 <>
-                  <HeaderAction icon="Notifications | Bell" label="Notifications" />
+                  <HeaderAction icon="Notifications | Bell" label="Notifications" badge onClick={() => { setSwitcher(false); nav.push({ name: 'notifications' }); }} />
                   <HeaderAction icon="Burger Menu" label="Menu" onClick={() => { setSwitcher(false); nav.push({ name: 'menu' }); }} />
                 </>
               }

@@ -4,7 +4,7 @@ import {
 } from 'flux-ds';
 import type { Nav } from '../App';
 import { MenuList, MenuRow } from '../components/MenuRow';
-import { pendingWarranties, registrations, systems, systemsOverview as o } from '../data';
+import { alertCounts as ac, pendingWarranties, redAlert, registrations, systems, systemsOverview as o } from '../data';
 
 export function InstallsView({ tab, nav }: { tab: string; nav: Nav }) {
   if (tab === 'systems') return <Systems nav={nav} />;
@@ -26,9 +26,9 @@ function SystemsBar() {
 }
 
 const alertCounts = [
-  { label: 'Emergency', value: 1, color: 'var(--color-red-600)' },
-  { label: 'Major', value: 5, color: 'var(--color-orange-400)' },
-  { label: 'Minor', value: 6, color: 'var(--color-neutral-400)' },
+  { label: 'Emergency', value: ac.emergency, color: 'var(--color-red-600)' },
+  { label: 'Major', value: ac.major, color: 'var(--color-orange-400)' },
+  { label: 'Minor', value: ac.minor, color: 'var(--color-neutral-400)' },
 ];
 
 /** Donut with the alerts split by level (Figma "Alerts" card). */
@@ -45,6 +45,7 @@ function AlertsDonut() {
         <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
           <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--color-background-strong)" strokeWidth={stroke} />
           {alertCounts.map((a) => {
+            if (!a.value) return null;
             const len = (a.value / total) * c;
             const el = (
               <circle
@@ -55,7 +56,7 @@ function AlertsDonut() {
                 fill="none"
                 stroke={a.color}
                 strokeWidth={stroke}
-                strokeDasharray={`${Math.max(len - 2, 0)} ${c}`}
+                strokeDasharray={a.value === total ? `${c} ${c}` : `${Math.max(len - 2, 0)} ${c}`}
                 strokeDashoffset={-offset}
                 transform={`rotate(-90 ${size / 2} ${size / 2})`}
               />
@@ -91,7 +92,7 @@ function Home({ nav }: { nav: Nav }) {
       </Card>
 
       <Card padding="none">
-        <CardHeader title="Alerts" onClick={() => nav.push({ name: 'system', id: 's1' })} />
+        <CardHeader title="Alerts" onClick={() => nav.push({ name: 'alert', id: redAlert.id })} />
         <div className="alerts-body">
           <AlertsDonut />
           <div className="alerts-legend">
@@ -106,7 +107,7 @@ function Home({ nav }: { nav: Nav }) {
       </Card>
 
       {/* Commissioning keeps today's entry point on the Installs home */}
-      <Button fullWidth>
+      <Button size="big" icon="Add" fullWidth>
         Begin installation
       </Button>
     </div>
