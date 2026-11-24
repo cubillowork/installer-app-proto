@@ -58,7 +58,7 @@
 .footer-action { padding: var(--spacing-lg) var(--spacing-xl); background: var(--color-background-default); border-top: 1px solid var(--color-border-subtle); }
 
 .caption { max-width: 260px; display: flex; flex-direction: column; gap: var(--spacing-sm); color: var(--color-text-secondary); }
-.caption .h6 { color: var(--color-text-primary); }
+.caption .t-subtitle { color: var(--color-text-primary); }
 .caption a { color: var(--color-text-link); }
 
 /* Helpers */
