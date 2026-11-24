@@ -143,7 +143,7 @@ export default function App() {
       </div>
 
       <aside className="caption">
-        <p className="h6">Installer App × Partner Portal</p>
+        <p className="h6">Installer and Partner merged app v1</p>
         <p className="p5-regular">
           Prototype · built with <a href="https://cubillowork.github.io/flux-ds/">Flux DS v0.3.0</a>. Tap the title to open the workspace switcher.
         </p>

@@ -1,4 +1,4 @@
-# Installer App × Partner Portal — prototype
+# Installer and Partner merged app v1 — prototype
 
 Clickable prototype of the SunPower Installer App with the Partner Portal features, organised in **workspaces** with a **workspace switcher** in the header: Installs · Academy · Partner program · Buy products.
 

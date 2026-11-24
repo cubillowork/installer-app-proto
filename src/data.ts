@@ -1,7 +1,7 @@
 // Sample data for the prototype. Texts come from the Figma mockups (Installer app – Portal 2027).
 import type { IconName, TagStatus } from 'flux-ds';
 
-export const systemsOverview = { total: 102, normal: 90, alerts: 12, offline: 5 };
+export const systemsOverview = { total: 107, normal: 90, alerts: 12, offline: 5 }; // total = normal + alerts + offline
 
 export const pendingWarranties = [
   { id: 'w1', name: 'Jess Becker', detail: 'Commissioned 12 Nov · not registered' },
