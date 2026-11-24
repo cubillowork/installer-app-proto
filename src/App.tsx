@@ -111,7 +111,7 @@ export default function App() {
             </main>
             <BottomNav items={items} value={tab[view]} onChange={(t) => setTab((s) => ({ ...s, [view]: t }))} />
 
-            <BottomSheet open={switcher} onClose={() => setSwitcher(false)} from="top" offsetTop={92}>
+            <BottomSheet open={switcher} onClose={() => setSwitcher(false)} from="top" offsetTop={48}>
               {(Object.keys(viewMeta) as View[]).map((v) => (
                 <NavItem
                   key={v}

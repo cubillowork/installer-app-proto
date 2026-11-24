@@ -1,3 +1,4 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; }
 body { font-family: var(--font-family); color: var(--color-text-primary); background: var(--color-background-subtle); }
+h1, h2, h3, h4, p { margin: 0; }
