@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Button, ChipGroup, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, SearchField, SectionHeader, StatusDot, Tag,
+  Button, ChipGroup, Card, CardBody, CardHeader, Icon, Link, ListItem, SearchField, SectionHeader, StatusDot, Tag,
 } from 'flux-ds';
 import type { Nav } from '../App';
 import { MenuList, MenuRow } from '../components/MenuRow';
@@ -149,15 +149,23 @@ function Systems({ nav }: { nav: Nav }) {
       ) : (
         <>
           <SearchField placeholder="Search system, address or ID" aria-label="Search systems" />
-          {systems.map((s) => (
-            <Card key={s.id} onClick={() => nav.push({ name: 'system', id: s.id })}>
-              <span className="p2-semibold">{s.name}</span>
-              <div className="row">{s.tags.map((t) => <Tag key={t} status={t} />)}</div>
-              <div className="row p5-regular"><Icon name="Location" size={18} />{s.address}</div>
-              <KeyValue label="Installed on" value={s.installed} />
-              <KeyValue label="Type" value={s.type} />
-            </Card>
-          ))}
+          <div className="system-list">
+            {systems.map((s) => (
+              <button key={s.id} type="button" className="system-card" onClick={() => nav.push({ name: 'system', id: s.id })}>
+                <span className="system-card__body">
+                  <span className="system-card__title">
+                    <span className="p2-semibold">{s.name}</span>
+                    <span className="system-card__tags">{s.tags.map((t) => <Tag key={t} status={t} />)}</span>
+                  </span>
+                  <span className="system-card__info p5-regular">
+                    <span>Installed on</span><b>{s.installed}</b>
+                    <span>Address:</span><b>{s.address}</b>
+                  </span>
+                </span>
+                <Icon name="Arrow right" size={18} />
+              </button>
+            ))}
+          </div>
         </>
       )}
     </div>
