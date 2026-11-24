@@ -1,0 +1,13 @@
+.stage { min-height: 100vh; display: grid; place-items: center; padding: var(--spacing-xl); }
+.phone {
+  width: 375px;
+  height: 812px;
+  background: var(--color-background-default);
+  border-radius: 40px;
+  box-shadow: var(--shadow-elevation-card), 0 0 0 10px var(--color-neutral-900);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.phone-header { display: flex; justify-content: space-between; align-items: center; padding: 56px var(--spacing-xl) var(--spacing-md); }
+.phone-body { padding: var(--spacing-xl); display: flex; flex-direction: column; gap: var(--spacing-lg); }
