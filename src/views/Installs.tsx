@@ -1,8 +1,8 @@
 import {
-  AlertItem, Button, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, NavItem, SearchField, SectionHeader, StatusDot, Tag,
+  Button, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, NavItem, SearchField, SectionHeader, StatusDot, Tag,
 } from 'flux-ds';
 import type { Nav } from '../App';
-import { alerts, pendingWarranties, registrations, systems, systemsOverview as o } from '../data';
+import { pendingWarranties, registrations, systems, systemsOverview as o } from '../data';
 
 export function InstallsView({ tab, nav }: { tab: string; nav: Nav }) {
   if (tab === 'systems') return <Systems nav={nav} />;
@@ -24,14 +24,55 @@ function SystemsBar() {
   );
 }
 
+const alertCounts = [
+  { label: 'Emergency', value: 1, color: 'var(--color-red-600)' },
+  { label: 'Major', value: 5, color: 'var(--color-orange-400)' },
+  { label: 'Minor', value: 5, color: 'var(--color-neutral-400)' },
+];
+
+/** Donut with the alerts split by level (Figma "Alerts" card). */
+function AlertsDonut() {
+  const total = alertCounts.reduce((a, b) => a + b.value, 0);
+  const size = 120;
+  const stroke = 14;
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  let offset = 0;
+  return (
+    <div className="donut">
+      <div className="donut__chart">
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--color-background-strong)" strokeWidth={stroke} />
+          {alertCounts.map((a) => {
+            const len = (a.value / total) * c;
+            const el = (
+              <circle
+                key={a.label}
+                cx={size / 2}
+                cy={size / 2}
+                r={r}
+                fill="none"
+                stroke={a.color}
+                strokeWidth={stroke}
+                strokeDasharray={`${Math.max(len - 2, 0)} ${c}`}
+                strokeDashoffset={-offset}
+                transform={`rotate(-90 ${size / 2} ${size / 2})`}
+              />
+            );
+            offset += len;
+            return el;
+          })}
+        </svg>
+        <span className="h3 donut__total">{total}</span>
+      </div>
+      <span className="p4-regular muted">Total alerts</span>
+    </div>
+  );
+}
+
 function Home({ nav }: { nav: Nav }) {
   return (
     <div className="page">
-      {/* Commissioning stays one tap away — same place as in today's Installer App */}
-      <Button size="big" icon="Add" fullWidth onClick={() => nav.push({ name: 'new-installation' })}>
-        New installation
-      </Button>
-
       <Card padding="none">
         <CardHeader title="Systems overview" onClick={() => nav.go('installs', 'systems')} />
         <CardBody>
@@ -41,31 +82,32 @@ function Home({ nav }: { nav: Nav }) {
           </div>
           <SystemsBar />
           <div className="legend">
-            <div><span className="h5">{o.normal}</span><StatusDot tone="success">Normal</StatusDot></div>
-            <div><span className="h5">{o.alerts}</span><StatusDot tone="error">Alerts</StatusDot></div>
-            <div><span className="h5">{o.offline}</span><StatusDot tone="neutral">Offline</StatusDot></div>
+            <div><span className="p1-semibold muted">{o.normal}</span><StatusDot tone="success">Normal</StatusDot></div>
+            <div><span className="p1-semibold muted">{o.alerts}</span><StatusDot tone="error">Alerts</StatusDot></div>
+            <div><span className="p1-semibold muted">{o.offline}</span><StatusDot tone="neutral">Offline</StatusDot></div>
           </div>
         </CardBody>
       </Card>
 
-      <SectionHeader title="Alerts" actionLabel="See all" onAction={() => nav.go('installs', 'systems')} />
-      {alerts.map((a) => (
-        <AlertItem key={a.id} level={a.level} title={a.title} meta={a.meta} status={a.status} onClick={() => nav.push({ name: 'system', id: 's1' })} />
-      ))}
-
       <Card padding="none">
-        <CardHeader title="Pending warranties" onClick={() => nav.go('installs', 'warranty')} />
-        <div className="card-list">
-          {pendingWarranties.map((w) => (
-            <ListItem
-              key={w.id}
-              title={w.name}
-              description={w.detail}
-              trailing={<Link onClick={() => nav.push({ name: 'register-warranty', owner: w.name })}>Register</Link>}
-            />
-          ))}
+        <CardHeader title="Alerts" onClick={() => nav.push({ name: 'system', id: 's1' })} />
+        <div className="alerts-body">
+          <AlertsDonut />
+          <div className="alerts-legend">
+            {alertCounts.map((a) => (
+              <div key={a.label}>
+                <span className="legend-label p5-regular muted"><span className="dot" style={{ background: a.color }} />{a.label}</span>
+                <span className="p1-semibold">{a.value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </Card>
+
+      {/* Commissioning keeps today's entry point on the Installs home */}
+      <Button fullWidth onClick={() => nav.push({ name: 'new-installation' })}>
+        Begin installation
+      </Button>
     </div>
   );
 }

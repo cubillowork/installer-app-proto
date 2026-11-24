@@ -24,7 +24,7 @@ const tabs = {
     { value: 'home', label: 'Home', icon: 'Home | House | Other' },
     { value: 'systems', label: 'Systems', icon: 'List' },
     { value: 'support', label: 'Support', icon: 'Support' },
-    { value: 'warranty', label: 'Warranty', icon: 'agreement', badge: true },
+    { value: 'warranty', label: 'Warranty', icon: 'agreement' },
     { value: 'me', label: 'Me', icon: 'Person_user' },
   ],
   academy: [
@@ -99,7 +99,7 @@ export default function App() {
               actions={
                 <>
                   <IconButton icon="Notifications | Bell" label="Notifications" variant="secondary" />
-                  <IconButton icon="Person_user" label="Account" variant="secondary" />
+                  <IconButton icon="Burger Menu" label="Menu" variant="secondary" />
                 </>
               }
             />
