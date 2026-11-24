@@ -177,12 +177,9 @@ function ContactCard() {
         <div key={r.cta} className="contact-card__row">
           <span className="contact-card__icon"><Icon name={r.icon} size={16} /></span>
           <span className="contact-card__text">
-            <span className="p4-regular">{r.text}</span>
+            <a className="contact-card__link p4-semibold" href={r.href} aria-label={`${r.cta} ${r.text}`}>{r.text}</a>
             <span className="p5-regular muted">{r.sub}</span>
           </span>
-          <a className="flux-button flux-button--primary flux-button--medium" href={r.href}>
-            <span>{r.cta}</span>
-          </a>
         </div>
       ))}
     </section>
