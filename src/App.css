@@ -231,7 +231,7 @@
 .phone:has(.flux-header-mobile) .status-bar { background: var(--color-background-default); }
 
 /* System detail (Figma 82:4149) — illustration behind, readings on top */
-.phone:has(.system) { background: #d4d9e0; }
+.phone:has(.system) { background: linear-gradient(#fafafc 0 50%, #d4d9df 100%); } /* matches the house illustration: top #fafafc, bottom #d4d9df */
 .phone:has(.system) .status-bar { background: transparent; }
 .system { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 .system__layer { position: absolute; left: 0; width: 375px; pointer-events: none; }
@@ -352,3 +352,6 @@
 .alert-card__how { display: inline-flex; align-items: center; gap: var(--spacing-xs); align-self: flex-start; padding: var(--spacing-xs) var(--spacing-sm); border-radius: 2px; background: var(--color-yellow-300); }
 .alert-card ol { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px; }
 .page > .flux-link { align-self: flex-start; }
+
+.system__line { position: absolute; width: 1px; background: linear-gradient(rgb(41 41 41 / 0.05), rgb(30 30 30 / 0.2)); pointer-events: none; }
+.system__line--h { height: 1px; background: linear-gradient(90deg, rgb(30 30 30 / 0.2), rgb(41 41 41 / 0.05)); }

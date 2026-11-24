@@ -49,9 +49,14 @@ export function SystemDetail({ nav, id }: { nav: Nav; id: string }) {
         </button>
       </header>
       <div className="system__tags">
-        <Tag status="online" />
-        <Tag status="on-grid" />
+        {s.tags.map((t) => <Tag key={t} status={t} />)}
       </div>
+
+      {/* Indicator lines joining each reading to the house (Figma "indicator gradient") */}
+      <span className="system__line" style={{ left: 21, top: 119, height: 215 }} />
+      <span className="system__line" style={{ left: 153, top: 116, height: 101 }} />
+      <span className="system__line" style={{ left: 329, top: 150, height: 46 }} />
+      <span className="system__line system__line--h" style={{ left: 205, top: 433, width: 26 }} />
 
       <Reading value="8.1" unit="kW" label="Home" style={{ top: 119, left: 28 }} />
       <Reading value="4.5" unit="kW" label="Solar" style={{ top: 116, left: 160 }} />
