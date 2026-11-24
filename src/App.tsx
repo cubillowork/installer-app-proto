@@ -7,6 +7,7 @@ import { BuyView } from './views/Buy';
 import { NewInstallation } from './screens/NewInstallation';
 import { RegisterWarranty } from './screens/RegisterWarranty';
 import { SystemDetail } from './screens/SystemDetail';
+import { SafeArea, StatusBar } from './StatusBar';
 import './App.css';
 
 // ---------- Views (switcher) and their bottom bars ----------
@@ -77,10 +78,7 @@ export default function App() {
   return (
     <div className="stage">
       <div className="phone">
-        <div className="status-bar p5-semibold">
-          <span>9:41</span>
-          <span className="status-bar__right">●●● ▲ ▮</span>
-        </div>
+        <StatusBar />
 
         {screen ? (
           // Task and detail screens: Header mobile, no bottom bar
@@ -128,7 +126,7 @@ export default function App() {
             </BottomSheet>
           </div>
         )}
-        <div className="home-indicator" />
+        <SafeArea />
       </div>
 
       <aside className="caption">
