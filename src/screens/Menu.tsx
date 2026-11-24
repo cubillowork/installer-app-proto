@@ -26,7 +26,6 @@ export function Menu({ nav }: { nav: Nav }) {
             <MenuRow icon="Full screen" title="Scan QR code" />
             <MenuRow icon="News" title="Language" description="Select your preferred app language" />
             <MenuRow icon="Two persons_user" title="User management" description="Invite users, roles & permissions" />
-            <MenuRow icon="Notifications | Bell" title="Notifications" description="TBD" />
             <MenuRow icon="Information" title="About" description="Privacy policy, Terms of use agreement" />
             <MenuRow icon="Refresh | Reload" title="Clear cache" />
             <hr className="me__divider" />
