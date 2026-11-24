@@ -352,3 +352,4 @@
 .pre { white-space: pre-line; }
 .alert-card__how { display: inline-flex; align-items: center; gap: var(--spacing-xs); align-self: flex-start; padding: var(--spacing-xs) var(--spacing-sm); border-radius: 2px; background: var(--color-yellow-300); }
 .alert-card ol { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px; }
+.page > .flux-link { align-self: flex-start; }
