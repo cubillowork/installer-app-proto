@@ -156,3 +156,9 @@
 .alerts-legend > div { display: flex; flex-direction: column; }
 .legend-label { display: inline-flex; align-items: center; gap: 6px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Workspace switcher (Figma 71:2558): no check, no arrows; current workspace = dark icon tile */
+.workspace-switcher .flux-nav-item__check { display: none; }
+.workspace-switcher .flux-nav-item__icon { border-radius: 2px; background: var(--color-background-strong); color: var(--color-text-primary); }
+.workspace-switcher .flux-nav-item.is-selected .flux-nav-item__icon { background: var(--color-neutral-900); color: var(--color-text-white); }
+.workspace-switcher .flux-nav-item__description { font-size: 13px; line-height: 16px; }

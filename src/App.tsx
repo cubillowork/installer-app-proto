@@ -14,9 +14,9 @@ import './App.css';
 export type View = 'installs' | 'academy' | 'partner' | 'buy';
 
 const viewMeta: Record<View, { title: string; description: string; icon: IconName }> = {
-  installs: { title: 'Installs', description: 'Commissioning and monitor systems', icon: 'PV | Solar system' },
+  installs: { title: 'Installs', description: 'Commissioning and monitor systems', icon: 'Person_installer' },
   academy: { title: 'Academy', description: 'Training videos, live training and courses', icon: 'Idea' },
-  partner: { title: 'Partner program', description: 'Your tier, benefits, leads and marketing', icon: 'agreement' },
+  partner: { title: 'Partner program', description: 'Your tier, benefits, leads and marketing', icon: 'Two persons_user' },
   buy: { title: 'Buy products', description: 'Catalogue, cart and price requests', icon: 'My products' },
 };
 
@@ -110,9 +110,11 @@ export default function App() {
             <BottomNav items={items} value={tab[view]} onChange={(t) => setTab((s) => ({ ...s, [view]: t }))} />
 
             <BottomSheet open={switcher} onClose={() => setSwitcher(false)} from="top" offsetTop={48}>
+              <div className="workspace-switcher">
               {(Object.keys(viewMeta) as View[]).map((v) => (
                 <NavItem
                   key={v}
+                  chevron={false}
                   icon={viewMeta[v].icon}
                   title={viewMeta[v].title}
                   description={viewMeta[v].description}
@@ -123,6 +125,7 @@ export default function App() {
                   }}
                 />
               ))}
+              </div>
             </BottomSheet>
           </div>
         )}
