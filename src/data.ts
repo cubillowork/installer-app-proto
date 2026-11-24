@@ -1,7 +1,7 @@
 // Sample data for the prototype. Texts come from the Figma mockups (Installer app – Portal 2027).
 import type { IconName, TagStatus } from 'flux-ds';
 
-// 12 installations: 9 normal, 1 with an emergency alert, 2 offline.
+// 12 installations: 7 normal, 1 emergency alert, 2 major alerts, 2 offline.
 export const systems: {
   id: string;
   name: string;
@@ -15,9 +15,9 @@ export const systems: {
   { id: 's4', name: 'Becker Residence', address: 'Hamburg · Hauptstrasse 4a', tags: ['online', 'on-grid'], installed: 'Nov 12, 2026' },
   { id: 's5', name: 'García Residence', address: 'Madrid · Calle de Alcalá 112', tags: ['online', 'on-grid'], installed: 'Oct 28, 2026' },
   { id: 's6', name: 'Dubois Residence', address: 'Lyon · Rue de la République 45', tags: ['online', 'on-grid'], installed: 'Oct 14, 2026' },
-  { id: 's7', name: 'Novak Residence', address: 'Munich · Leopoldstraße 77', tags: ['online', 'off-grid'], installed: 'Sep 30, 2026' },
+  { id: 's7', name: 'Novak Residence', address: 'Munich · Leopoldstraße 77', tags: ['online', 'major'], installed: 'Sep 30, 2026' },
   { id: 's8', name: 'Bianchi Residence', address: 'Turin · Corso Francia 9', tags: ['offline'], installed: 'Sep 2, 2026' },
-  { id: 's9', name: 'Murphy Residence', address: 'Manchester · Deansgate 210', tags: ['online', 'on-grid'], installed: 'Aug 19, 2026' },
+  { id: 's9', name: 'Murphy Residence', address: 'Manchester · Deansgate 210', tags: ['online', 'major'], installed: 'Aug 19, 2026' },
   { id: 's10', name: 'Larsen Residence', address: 'Bergen · Bryggen 3', tags: ['online', 'on-grid'], installed: 'Jul 22, 2026' },
   { id: 's11', name: 'Schmidt Residence', address: 'Berlin · Torstraße 15', tags: ['online', 'on-grid'], installed: 'Jun 11, 2026' },
   { id: 's12', name: 'Fernández Residence', address: 'Seville · Calle Betis 40', tags: ['online', 'on-grid'], installed: 'May 5, 2026' },
@@ -30,7 +30,7 @@ export const systemsOverview = {
   offline: systems.filter((s) => s.tags.includes('offline')).length,
 };
 
-export const alertCounts = { emergency: 1, major: 0, minor: 0 };
+export const alertCounts = { emergency: 1, major: 2, minor: 0 };
 
 /** The red alert (Figma 🛠️ Installer App, node 7549:9739). */
 export const redAlert = {
