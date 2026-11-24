@@ -105,7 +105,7 @@ function Home({ nav }: { nav: Nav }) {
       </Card>
 
       {/* Commissioning keeps today's entry point on the Installs home */}
-      <Button fullWidth onClick={() => nav.push({ name: 'new-installation' })}>
+      <Button fullWidth>
         Begin installation
       </Button>
     </div>
