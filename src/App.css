@@ -164,9 +164,8 @@
 .workspace-switcher .flux-nav-item__description { font-size: 13px; line-height: 16px; }
 
 /* Me (Installs) — white page, rows: icon 24 · title p2 semibold · description p5 · arrow 16, gap 32 */
-.content:has(.me) { background: var(--color-background-default); }
+.me-content { background: var(--color-background-default); }
 .me { gap: var(--spacing-2xl); }
-.me__hello { text-align: center; }
 .me__list { display: flex; flex-direction: column; gap: var(--spacing-2xl); }
 .me-row {
   display: flex;

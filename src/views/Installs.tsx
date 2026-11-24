@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   Button, ChipGroup, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, NavItem, SearchField, SectionHeader, StatusDot, Tag,
 } from 'flux-ds';
-import type { IconName } from 'flux-ds';
 import type { Nav } from '../App';
 import { pendingWarranties, registrations, systems, systemsOverview as o } from '../data';
 
@@ -10,7 +9,6 @@ export function InstallsView({ tab, nav }: { tab: string; nav: Nav }) {
   if (tab === 'systems') return <Systems nav={nav} />;
   if (tab === 'support') return <Support />;
   if (tab === 'warranty') return <Warranty nav={nav} />;
-  if (tab === 'me') return <Me />;
   return <Home nav={nav} />;
 }
 
@@ -206,37 +204,6 @@ function Warranty({ nav }: { nav: Nav }) {
           ))}
         </div>
       </Card>
-    </div>
-  );
-}
-
-/** Me — as in today's Installer App (Figma 🛠️ Installer App, node 7549:11177). */
-function MeRow({ icon, title, description, chevron = true }: { icon: IconName; title: string; description?: string; chevron?: boolean }) {
-  return (
-    <button type="button" className="me-row">
-      <Icon name={icon} />
-      <span className="me-row__text">
-        <span className="p2-semibold">{title}</span>
-        {description && <span className="p5-regular">{description}</span>}
-      </span>
-      {chevron && <Icon name="Arrow right" size={16} />}
-    </button>
-  );
-}
-
-function Me() {
-  return (
-    <div className="page me">
-      <h2 className="p2-semibold me__hello">Hello, Xin</h2>
-      <div className="me__list">
-        <MeRow icon="Person_user" title="My account" description="Change your name, email or password" />
-        <MeRow icon="Full screen" title="Scan QR code" />
-        <MeRow icon="News" title="Language" description="Select your preferred app language" />
-        <MeRow icon="Information" title="About" description="Privacy policy, Terms of use agreement" />
-        <MeRow icon="Refresh | Reload" title="Clear cache" />
-        <hr className="me__divider" />
-        <MeRow icon="Logout" title="Log out" chevron={false} />
-      </div>
     </div>
   );
 }

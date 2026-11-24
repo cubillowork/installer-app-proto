@@ -7,6 +7,7 @@ import { BuyView } from './views/Buy';
 import { NewInstallation } from './screens/NewInstallation';
 import { RegisterWarranty } from './screens/RegisterWarranty';
 import { SystemDetail } from './screens/SystemDetail';
+import { Menu } from './screens/Menu';
 import { SafeArea, StatusBar } from './StatusBar';
 import './App.css';
 
@@ -26,7 +27,6 @@ const tabs = {
     { value: 'systems', label: 'Systems', icon: 'List' },
     { value: 'support', label: 'Support', icon: 'Support' },
     { value: 'warranty', label: 'Warranty', icon: 'agreement' },
-    { value: 'me', label: 'Me', icon: 'Person_user' },
   ],
   academy: [
     { value: 'learn', label: 'Learn', icon: 'Video play' },
@@ -46,7 +46,7 @@ const tabs = {
 } satisfies Record<View, BottomNavItem<string>[]>;
 
 // ---------- Screens pushed on top of a view ----------
-export type Screen = { name: 'new-installation' } | { name: 'register-warranty'; owner?: string } | { name: 'system'; id: string };
+export type Screen = { name: 'menu' } | { name: 'new-installation' } | { name: 'register-warranty'; owner?: string } | { name: 'system'; id: string };
 
 export type Nav = {
   go: (view: View, tab?: string) => void;
@@ -86,6 +86,7 @@ export default function App() {
             {screen.name === 'new-installation' && <NewInstallation nav={nav} />}
             {screen.name === 'register-warranty' && <RegisterWarranty nav={nav} owner={screen.owner} />}
             {screen.name === 'system' && <SystemDetail nav={nav} id={screen.id} />}
+            {screen.name === 'menu' && <Menu nav={nav} />}
           </div>
         ) : (
           // Root screens: App header with the workspace switcher + the workspace bottom bar
@@ -97,7 +98,7 @@ export default function App() {
               actions={
                 <>
                   <IconButton icon="Notifications | Bell" label="Notifications" variant="secondary" />
-                  <IconButton icon="Burger Menu" label="Menu" variant="secondary" />
+                  <IconButton icon="Burger Menu" label="Menu" variant="secondary" onClick={() => { setSwitcher(false); nav.push({ name: 'menu' }); }} />
                 </>
               }
             />
