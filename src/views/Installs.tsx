@@ -142,7 +142,7 @@ function Support() {
         <ListItem icon="Phone" title="+44 20 4572 6579" description="Mon–Fri, 8:00–18:00" />
         <ListItem icon="Email" title="PartnerService.UK@sunpowerglobal.com" description="We reply within 1 working day" />
       </Card>
-      <p className="p5-regular muted">Training videos moved to Academy (switch view at the top).</p>
+      <p className="p5-regular muted">Training videos moved to the Academy workspace (tap the title at the top).</p>
     </div>
   );
 }

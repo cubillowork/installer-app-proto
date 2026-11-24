@@ -10,7 +10,7 @@ import { SystemDetail } from './screens/SystemDetail';
 import { SafeArea, StatusBar } from './StatusBar';
 import './App.css';
 
-// ---------- Views (switcher) and their bottom bars ----------
+// ---------- Workspaces (workspace switcher) and their bottom bars ----------
 export type View = 'installs' | 'academy' | 'partner' | 'buy';
 
 const viewMeta: Record<View, { title: string; description: string; icon: IconName }> = {
@@ -88,7 +88,7 @@ export default function App() {
             {screen.name === 'system' && <SystemDetail nav={nav} id={screen.id} />}
           </div>
         ) : (
-          // Root screens: App header with the view switcher + the view's bottom bar
+          // Root screens: App header with the workspace switcher + the workspace bottom bar
           <div className="screen">
             <AppHeader
               title={viewMeta[view].title}
@@ -132,8 +132,7 @@ export default function App() {
       <aside className="caption">
         <p className="h6">Installer App × Partner Portal</p>
         <p className="p5-regular">
-          Prototype · built with <a href="https://cubillowork.github.io/flux-ds/">Flux DS v0.3.0</a>. Tap the title to switch
-          views.
+          Prototype · built with <a href="https://cubillowork.github.io/flux-ds/">Flux DS v0.3.0</a>. Tap the title to open the workspace switcher.
         </p>
       </aside>
     </div>

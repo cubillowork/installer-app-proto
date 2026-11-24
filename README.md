@@ -1,6 +1,6 @@
 # Installer App × Partner Portal — prototype
 
-Clickable prototype of the SunPower Installer App with the Partner Portal features, organised with a **view switcher** in the header: Installs · Academy · Partner program · Buy products.
+Clickable prototype of the SunPower Installer App with the Partner Portal features, organised in **workspaces** with a **workspace switcher** in the header: Installs · Academy · Partner program · Buy products.
 
 Live: **https://cubillowork.github.io/installer-app-proto/**
 
@@ -8,7 +8,7 @@ Built with **[Flux DS](https://github.com/cubillowork/flux-ds)** (`flux-ds` v0.3
 
 ## Screens
 
-- [x] View switcher — tap the title (Installs ▾)
+- [x] Workspace switcher — tap the title (Installs ▾)
 - [x] Installs — Home (New installation, systems overview, alerts, pending warranties), Systems, Support, Warranty, Me
 - [x] New installation — product choice + training check before commissioning X5 / W10
 - [x] Register warranty — form with prefilled serial number
