@@ -288,3 +288,6 @@
 .contact-card__text { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow-wrap: anywhere; }
 .contact-card__link { color: var(--component-link-variant-primary-default-text); text-decoration: underline; text-underline-offset: 2px; }
 .contact-card__link:hover { color: var(--component-link-variant-primary-hover-text); }
+
+/* Section spacing: 24px between sections (page gap), 12px between a section title and its content */
+.page > .flux-section-header + * { margin-top: calc(var(--spacing-md) - var(--spacing-xl)); }
