@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Button, ChipGroup, Card, CardBody, CardHeader, Icon, Link, ListItem, SearchField, SectionHeader, StatusDot, Tag,
+  Button, ChipGroup, EmptyState, Card, CardBody, CardHeader, Icon, Link, ListItem, SearchField, SectionHeader, StatusDot, Tag,
 } from 'flux-ds';
 import type { Nav } from '../App';
 import { MenuList, MenuRow } from '../components/MenuRow';
@@ -65,9 +65,9 @@ function AlertsDonut() {
             return el;
           })}
         </svg>
-        <span className="h3 donut__total">{total}</span>
+        <span className="t-title donut__total">{total}</span>
       </div>
-      <span className="p4-regular muted">Total alerts</span>
+      <span className="t-body muted">Total alerts</span>
     </div>
   );
 }
@@ -79,14 +79,14 @@ function Home({ nav }: { nav: Nav }) {
         <CardHeader title="Systems overview" onClick={() => nav.go('installs', 'systems')} />
         <CardBody>
           <div className="big-number">
-            <span className="h2">{o.total}</span>
-            <span className="p3-regular">Total systems</span>
+            <span className="t-number">{o.total}</span>
+            <span className="t-body">Total systems</span>
           </div>
           <SystemsBar />
           <div className="legend">
-            <div><span className="p1-semibold">{o.normal}</span><StatusDot tone="success">Normal</StatusDot></div>
-            <div><span className="p1-semibold">{o.alerts}</span><StatusDot tone="error">Alerts</StatusDot></div>
-            <div><span className="p1-semibold">{o.offline}</span><StatusDot tone="neutral">Offline</StatusDot></div>
+            <div><span className="t-title">{o.normal}</span><StatusDot tone="success">Normal</StatusDot></div>
+            <div><span className="t-title">{o.alerts}</span><StatusDot tone="error">Alerts</StatusDot></div>
+            <div><span className="t-title">{o.offline}</span><StatusDot tone="neutral">Offline</StatusDot></div>
           </div>
         </CardBody>
       </Card>
@@ -98,8 +98,8 @@ function Home({ nav }: { nav: Nav }) {
           <div className="alerts-legend">
             {alertCounts.map((a) => (
               <div key={a.label}>
-                <span className="legend-label p5-regular muted"><span className="dot" style={{ background: a.color }} />{a.label}</span>
-                <span className="p1-semibold">{a.value}</span>
+                <span className="legend-label t-caption muted"><span className="dot" style={{ background: a.color }} />{a.label}</span>
+                <span className="t-title">{a.value}</span>
               </div>
             ))}
           </div>
@@ -116,6 +116,8 @@ function Home({ nav }: { nav: Nav }) {
 
 function Systems({ nav }: { nav: Nav }) {
   const [gen, setGen] = useState<'gen2' | 'gen1'>('gen2');
+  const [q, setQ] = useState('');
+  const list = systems.filter((s) => `${s.name} ${s.address}`.toLowerCase().includes(q.trim().toLowerCase()));
   return (
     <div className="page">
       <ChipGroup
@@ -129,7 +131,7 @@ function Systems({ nav }: { nav: Nav }) {
       />
       {gen === 'gen1' ? (
         <>
-          <p className="p4-regular muted">Gen 1 systems are managed in the Partner Portal.</p>
+          <p className="t-body muted">Gen 1 systems are managed in the Partner Portal.</p>
           {[
             { name: 'SunPower Reserve', description: 'Monitor and manage Reserve systems', icon: 'Battery_full' as const },
             { name: 'SunPower Drive', description: 'Monitor and manage Drive systems', icon: 'Power | Energy' as const },
@@ -138,27 +140,30 @@ function Systems({ nav }: { nav: Nav }) {
               <div className="gen1-card">
                 <Icon name={g.icon} />
                 <span className="gen1-card__text">
-                  <span className="p2-semibold">{g.name}</span>
-                  <span className="p5-regular muted">{g.description}</span>
+                  <span className="t-subtitle">{g.name}</span>
+                  <span className="t-caption muted">{g.description}</span>
                 </span>
                 <Icon name="Link_external" size={20} />
               </div>
-              <span className="p5-semibold gen1-card__note">Opens the Partner Portal</span>
+              <span className="t-caption-strong gen1-card__note">Opens the Partner Portal</span>
             </Card>
           ))}
         </>
       ) : (
         <>
-          <SearchField placeholder="Search system, address or ID" aria-label="Search systems" />
+          <SearchField placeholder="Search system, address or ID" aria-label="Search systems" value={q} onChange={(e) => setQ(e.target.value)} />
+          {!list.length && (
+            <EmptyState icon="Search" title="No systems match" description={`Nothing found for “${q}”. Try another name, city or ID.`} actionLabel="Clear search" onAction={() => setQ('')} />
+          )}
           <div className="system-list">
-            {systems.map((s) => (
+            {list.map((s) => (
               <button key={s.id} type="button" className="system-card" onClick={() => nav.push({ name: 'system', id: s.id })}>
                 <span className="system-card__body">
                   <span className="system-card__title">
-                    <span className="p2-semibold">{s.name}</span>
+                    <span className="t-subtitle">{s.name}</span>
                     <span className="system-card__tags">{s.tags.map((t) => <Tag key={t} status={t} />)}</span>
                   </span>
-                  <span className="system-card__info p5-regular">
+                  <span className="system-card__info t-caption">
                     <span>Installed on</span><b>{s.installed}</b>
                     <span>Address:</span><b>{s.address}</b>
                   </span>
@@ -181,13 +186,13 @@ function ContactCard() {
   ];
   return (
     <section className="contact-card">
-      <h2 className="h4">Contact us</h2>
+      <h2 className="t-title">Contact us</h2>
       {rows.map((r) => (
         <div key={r.cta} className="contact-card__row">
           <span className="contact-card__icon"><Icon name={r.icon} size={16} /></span>
           <span className="contact-card__text">
-            <a className="contact-card__link p4-semibold" href={r.href} aria-label={`${r.cta} ${r.text}`}>{r.text}</a>
-            <span className="p5-regular muted">{r.sub}</span>
+            <a className="contact-card__link t-body-strong" href={r.href} aria-label={`${r.cta} ${r.text}`}>{r.text}</a>
+            <span className="t-caption muted">{r.sub}</span>
           </span>
         </div>
       ))}
@@ -204,7 +209,7 @@ function Support() {
         <MenuRow icon="Remote Control" title="Remote support" description="Let support access a system" />
       </MenuList>
       <ContactCard />
-      <p className="p5-regular muted">Training videos moved to the Academy workspace (tap the title at the top).</p>
+      <p className="t-caption muted">Training videos moved to the Academy workspace (tap the title at the top).</p>
     </div>
   );
 }

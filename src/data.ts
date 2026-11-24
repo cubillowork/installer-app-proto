@@ -66,10 +66,10 @@ export const registrations: { id: string; code: string; owner: string; date: str
 ];
 
 export const videos = [
-  { id: 'v1', title: 'X5 commissioning, step by step', length: '12 min', progress: 60 },
-  { id: 'v2', title: 'Installing the Reserve battery', length: '8 min', progress: 100 },
-  { id: 'v3', title: 'Performance 7: mounting and wiring', length: '15 min', progress: 0 },
-  { id: 'v4', title: 'Troubleshooting communication alerts', length: '6 min', progress: 0 },
+  { id: 'v1', title: 'X5 commissioning, step by step', length: '12 min', progress: 60, product: 'x5' },
+  { id: 'v2', title: 'Installing the Reserve battery', length: '8 min', progress: 100, product: 'reserve' },
+  { id: 'v3', title: 'Performance 7: mounting and wiring', length: '15 min', progress: 0, product: 'panels' },
+  { id: 'v4', title: 'Troubleshooting X5 communication alerts', length: '6 min', progress: 0, product: 'x5' },
 ];
 
 export const events = [

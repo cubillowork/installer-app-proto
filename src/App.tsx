@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppHeader, BottomNav, BottomSheet, Icon, NavItem, type BottomNavItem, type IconName } from 'flux-ds';
 import { InstallsView } from './views/Installs';
 import { AcademyView } from './views/Academy';
@@ -11,6 +11,7 @@ import { Menu } from './screens/Menu';
 import { Notifications } from './screens/Notifications';
 import { AlertDetail } from './screens/AlertDetail';
 import { SafeArea, StatusBar } from './StatusBar';
+import { PageSkeleton } from './components/PageSkeleton';
 import './App.css';
 import './polish.css';
 
@@ -85,6 +86,16 @@ export default function App() {
   };
   const [cart, setCart] = useState<Record<string, number>>({});
 
+  // First visit to each screen shows a skeleton for a moment, like a real network load.
+  const pageKey = `${view}/${tab[view]}`;
+  const [loaded, setLoaded] = useState<Set<string>>(() => new Set());
+  const loading = !loaded.has(pageKey);
+  useEffect(() => {
+    if (loaded.has(pageKey)) return;
+    const t = window.setTimeout(() => setLoaded((s) => new Set(s).add(pageKey)), 700);
+    return () => window.clearTimeout(t);
+  }, [pageKey, loaded]);
+
   const nav: Nav = {
     go: (v, t) => {
       setView(v);
@@ -128,11 +139,17 @@ export default function App() {
                 </>
               }
             />
-            <main className="content" key={view + tab[view]}>
+            <main className="content" key={view + tab[view] + (loading ? '-loading' : '')}>
+              {loading ? (
+                <PageSkeleton kind={pageKey} />
+              ) : (
+                <>
               {view === 'installs' && <InstallsView tab={tab.installs} nav={nav} />}
               {view === 'academy' && <AcademyView tab={tab.academy} />}
               {view === 'partner' && <PartnerView tab={tab.partner} />}
               {view === 'buy' && <BuyView tab={tab.buy} cart={cart} setCart={setCart} nav={nav} />}
+                </>
+              )}
             </main>
             <BottomNav items={items} value={tab[view]} onChange={(t) => setTab((s) => ({ ...s, [view]: t }))} />
 
@@ -157,9 +174,9 @@ export default function App() {
       </div>
 
       <aside className="caption">
-        <p className="h6">Installer and Partner merged app v1</p>
-        <p className="p5-regular">
-          Prototype · built with <a href="https://cubillowork.github.io/flux-ds/">Flux DS v0.3.0</a>. Tap the title to open the workspace switcher.
+        <p className="t-subtitle">Installer and Partner merged app v1</p>
+        <p className="t-caption">
+          Prototype · built with <a href="https://cubillowork.github.io/flux-ds/">Flux DS v0.4.0</a>. Tap the title to open the workspace switcher.
         </p>
       </aside>
     </div>

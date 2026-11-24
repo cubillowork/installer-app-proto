@@ -19,8 +19,8 @@ export function NewInstallation({ nav }: { nav: Nav }) {
       <main className="content">
         <div className="page">
           <div>
-            <h2 className="h3">What are you installing?</h2>
-            <p className="p4-regular muted">Choose the product to start commissioning.</p>
+            <h2 className="t-title">What are you installing?</h2>
+            <p className="t-body muted">Choose the product to start commissioning.</p>
           </div>
           <div className="card-plain">
             {products.map((p) => (

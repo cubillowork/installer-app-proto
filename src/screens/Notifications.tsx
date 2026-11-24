@@ -9,11 +9,11 @@ function Notification({ title, tag, tagLabel, time, text, onClick }: Item) {
     <>
       <span className="notif__body">
         <span className="notif__top">
-          <span className="p3-semibold">{title}</span>
-          <span className="p5-regular muted nowrap">{time}</span>
+          <span className="t-body-strong">{title}</span>
+          <span className="t-caption muted nowrap">{time}</span>
         </span>
         <Tag status={tag}>{tagLabel}</Tag>
-        <span className="p5-regular">{text}</span>
+        <span className="t-caption">{text}</span>
       </span>
       <Icon name="Arrow right" size={18} />
     </>

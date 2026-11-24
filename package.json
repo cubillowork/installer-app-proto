@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "flux-ds": "github:cubillowork/flux-ds#v0.3.0",
+    "flux-ds": "github:cubillowork/flux-ds#22a4bf72764fd80cfe2da9df0d3b8366d3da5a36",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

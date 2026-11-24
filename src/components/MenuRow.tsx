@@ -21,8 +21,8 @@ export function MenuRow({
     <button type="button" className="me-row" onClick={onClick}>
       <Icon name={icon} />
       <span className="me-row__text">
-        <span className="p2-semibold">{title}</span>
-        {description && <span className="p5-regular muted">{description}</span>}
+        <span className="t-subtitle">{title}</span>
+        {description && <span className="t-caption muted">{description}</span>}
       </span>
       {trailing ?? (chevron && <Icon name="Arrow right" size={16} />)}
     </button>

@@ -19,7 +19,7 @@ export function AlertDetail({ nav }: { nav: Nav }) {
         <div className="page">
           <section className="alert-card">
             <div className="alert-card__title">
-              <span className="p2-semibold">{a.title}</span>
+              <span className="t-subtitle">{a.title}</span>
               <span><Tag status="emergency" /></span>
             </div>
             <dl className="alert-card__rows"><div><dt>Code</dt><dd>{a.code}</dd></div></dl>
@@ -31,13 +31,13 @@ export function AlertDetail({ nav }: { nav: Nav }) {
             </dl>
             <hr />
             <div className="alert-card__block">
-              <span className="p3-regular">Alert description</span>
-              <p className="p5-regular pre">{a.description}</p>
+              <span className="t-body">Alert description</span>
+              <p className="t-caption pre">{a.description}</p>
             </div>
             <hr />
             <div className="alert-card__block">
-              <span className="alert-card__how p5-regular"><Icon name="Information" size={18} />How to solve it?</span>
-              <ol className="p5-regular">
+              <span className="alert-card__how t-caption"><Icon name="Information" size={18} />How to solve it?</span>
+              <ol className="t-caption">
                 {a.steps.map((s) => <li key={s}>{s}</li>)}
               </ol>
             </div>

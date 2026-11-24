@@ -3,6 +3,3 @@ html, body { margin: 0; }
 body { font-family: var(--font-family); color: var(--color-text-primary); background: var(--color-background-subtle); }
 h1, h2, h3, h4, p { margin: 0; }
 
-/* Prototype override — softer card shadow than Flux elevation/card (0 4 12 · 8%).
-   If it works, update elevation/card in Flux Figma and flux-ds instead. */
-:root { --shadow-elevation-card: 0 2px 8px 0 rgb(0 0 0 / 0.06); }

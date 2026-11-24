@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, ChipGroup, Icon, Link, ProgressBar, ProgressCircle, Rail, SectionHeader } from 'flux-ds';
+import { Card, ChipGroup, EmptyState, Icon, Link, ProgressBar, ProgressCircle, Rail, SectionHeader } from 'flux-ds';
 import { events, videos } from '../data';
 
 export function AcademyView({ tab }: { tab: string }) {
@@ -18,14 +18,14 @@ function Thumb({ big = false }: { big?: boolean }) {
 
 export function EventCard({ e }: { e: (typeof events)[number] }) {
   return (
-    <Card padding="md" className="event-card">
+    <Card className="event-card">
       <div className="event-date">
-        <span className="h2">{e.day}</span>
-        <span className="p5-semibold">{e.month}</span>
+        <span className="t-number">{e.day}</span>
+        <span className="t-caption-strong">{e.month}</span>
       </div>
-      <span className="p4-semibold event-title">{e.title}</span>
+      <span className="t-body-strong event-title">{e.title}</span>
       <div className="row between">
-        <span className="p5-regular muted">{e.type}</span>
+        <span className="t-caption muted">{e.type}</span>
         <Link>Register</Link>
       </div>
     </Card>
@@ -35,6 +35,7 @@ export function EventCard({ e }: { e: (typeof events)[number] }) {
 function Learn() {
   const [filter, setFilter] = useState<'all' | 'x5' | 'w10' | 'reserve'>('all');
   const v = videos[0];
+  const shown = videos.filter((x) => filter === 'all' || x.product === filter);
   return (
     <div className="page">
       <ChipGroup
@@ -52,28 +53,33 @@ function Learn() {
       <Card padding="none" onClick={() => {}}>
         <Thumb big />
         <div className="card-pad">
-          <span className="p6-semibold eyebrow">CONTINUE LEARNING</span>
-          <span className="p3-semibold">{v.title}</span>
+          <span className="t-caption-strong eyebrow">CONTINUE LEARNING</span>
+          <span className="t-body-strong">{v.title}</span>
           <div className="row">
             <ProgressBar value={60} label="Course progress" />
-            <span className="p5-regular muted nowrap">3 of 5 videos</span>
+            <span className="t-caption muted nowrap">3 of 5 videos</span>
           </div>
         </div>
       </Card>
 
       <SectionHeader title="Training videos" actionLabel="See all" onAction={() => {}} />
-      {videos.map((video) => (
-        <Card key={video.id} padding="md" onClick={() => {}} className="video-row">
+      {!shown.length && (
+        <EmptyState icon="Video play" title={`No ${filter.toUpperCase()} videos yet`} description="New training is added every month. You'll get a notification when it's ready." actionLabel="See all videos" onAction={() => setFilter('all')} />
+      )}
+      <div className="stack">
+      {shown.map((video) => (
+        <Card key={video.id} onClick={() => {}} className="video-row">
           <Thumb />
           <div className="video-row__text">
-            <span className="p4-semibold">{video.title}</span>
-            <span className="p5-regular muted">
+            <span className="t-body-strong">{video.title}</span>
+            <span className="t-caption muted">
               {video.length}
               {video.progress === 100 ? ' · Watched' : video.progress ? ` · ${video.progress}%` : ''}
             </span>
           </div>
         </Card>
       ))}
+      </div>
 
       <SectionHeader title="Upcoming live training" actionLabel="See all" onAction={() => {}} />
       <Rail label="Upcoming live training" bleed>
@@ -89,9 +95,11 @@ function Live() {
   return (
     <div className="page">
       <SectionHeader title="Live training and events" />
-      {events.map((e) => (
-        <EventCard key={e.id} e={e} />
-      ))}
+      <div className="stack">
+        {events.map((e) => (
+          <EventCard key={e.id} e={e} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -105,18 +113,18 @@ function Progress() {
         </div>
       </Card>
       <SectionHeader title="Certificates" />
-      <Card padding="md">
+      <Card>
         <div className="row between">
-          <span className="p3-semibold">X5 commissioning</span>
-          <span className="p5-regular muted">In progress</span>
+          <span className="t-body-strong">X5 commissioning</span>
+          <span className="t-caption muted">In progress</span>
         </div>
         <ProgressBar value={60} label="X5 commissioning" />
-        <span className="p5-regular muted">Required before commissioning an X5 system</span>
+        <span className="t-caption muted">Required before commissioning an X5 system</span>
       </Card>
-      <Card padding="md">
+      <Card>
         <div className="row between">
-          <span className="p3-semibold">Reserve installer</span>
-          <span className="p5-regular success">Certified · ID RSV-2041</span>
+          <span className="t-body-strong">Reserve installer</span>
+          <span className="t-caption success">Certified · ID RSV-2041</span>
         </div>
         <ProgressBar value={100} label="Reserve installer" />
       </Card>

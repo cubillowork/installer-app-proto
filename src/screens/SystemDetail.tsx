@@ -43,7 +43,7 @@ export function SystemDetail({ nav, id }: { nav: Nav; id: string }) {
         <button type="button" className="header-action" aria-label="Back" onClick={nav.back}>
           <Icon name="Arrow left" />
         </button>
-        <h1 className="p2-semibold">{s.name}</h1>
+        <h1 className="t-subtitle">{s.name}</h1>
         <button type="button" className="header-action" aria-label="System settings">
           <Icon name="Settings | Gear" />
         </button>
@@ -73,27 +73,27 @@ export function SystemDetail({ nav, id }: { nav: Nav; id: string }) {
       <div className="system__cards">
         <div className="system__totals">
           <div>
-            <span className="p5-regular">Today’s production</span>
+            <span className="t-caption">Today’s production</span>
             <span className="system__big"><b>8.1</b> kWh</span>
           </div>
           <div className="right">
-            <span className="p5-regular">Today’s savings</span>
+            <span className="t-caption">Today’s savings</span>
             <span className="system__big">€ <b>7,6</b></span>
           </div>
         </div>
         <div className="system__mode">
           <div className="row between">
-            <span className="row p3-regular"><LeafIcon />Self-consumption mode</span>
+            <span className="row t-body"><LeafIcon />Self-consumption mode</span>
             <Tag status="online">Active</Tag>
           </div>
           <hr />
-          <button type="button" className="system__change p3-semibold">
+          <button type="button" className="system__change t-body-strong">
             Change mode <Icon name="Arrow right" size={16} />
           </button>
         </div>
       </div>
 
-      <p className="system__live p4-regular">Live data, updated every 10 secs.</p>
+      <p className="system__live t-body">Live data, updated every 10 secs.</p>
     </div>
   );
 }

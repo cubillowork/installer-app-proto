@@ -5,7 +5,6 @@
 
 /* 1. One surface language: every card uses the same radius (radius/md, 8px),
       the same shadow and white background. */
-.flux-card,
 .system-card,
 .notif,
 .alert-card,
@@ -25,8 +24,7 @@
 }
 
 /* 3. Text: balanced titles, no orphans in descriptions, readable minimum line length. */
-h1, h2, h3, .p2-semibold, .p3-semibold, .h4, .h5 { text-wrap: balance; }
-p, .p4-regular, .p5-regular { text-wrap: pretty; }
+p { text-wrap: pretty; }
 
 /* 4. Hierarchy: secondary text always uses text/secondary; values and titles text/primary. */
 .muted, .flux-list-item__description, .flux-nav-item__description { color: var(--color-text-secondary); }
@@ -82,6 +80,18 @@ p, .p4-regular, .p5-regular { text-wrap: pretty; }
 .flux-card-header { border-bottom-color: var(--color-border-subtle); }
 
 /* 11. Status colour only for status; brand blue only for actions and current state. */
-.legend .p1-semibold, .alerts-legend .p1-semibold { color: var(--color-text-primary); }
+.legend .t-title, .alerts-legend .t-title { color: var(--color-text-primary); }
 /* Badge stays on the bell after the larger hit area */
 .header-action .header-action__badge { top: 11px; right: 12px; }
+
+/* ===== Spacing system (8pt grid, Flux spacing tokens) =====
+   Screen padding 24 · between sections 24 · title → content 12 · repeated cards 12 · inside cards 16 */
+.stack { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.card-list { padding: 0 var(--spacing-lg); }
+.card-pad { padding: var(--spacing-lg); }
+/* Filters and the control under them belong together: 12px, not a new section */
+.page > .flux-chip-group + * { margin-top: calc(var(--spacing-md) - var(--spacing-xl)); }
+/* Stat cards side by side */
+.row > .flux-card + .flux-card { margin-left: var(--spacing-xs); }
+/* Rails keep 12px between cards and 16px padding inside */
+.flux-rail { gap: var(--spacing-md); }

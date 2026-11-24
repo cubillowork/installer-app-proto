@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Badge, Button, Card, ChipGroup, Icon, InfoBox, ListItem, SearchField, StatusDot, Stepper, Tag } from 'flux-ds';
+import { Badge, Button, Card, ChipGroup, EmptyState, Icon, InfoBox, ListItem, SearchField, StatusDot, Stepper, Tag } from 'flux-ds';
 import type { Nav } from '../App';
 import { products, type Product } from '../data';
 
@@ -14,23 +14,23 @@ export function BuyView({ tab, cart, setCart, nav }: Props) {
 
 function ProductCard({ p, qty, onQty }: { p: Product; qty: number; onQty: (n: number) => void }) {
   return (
-    <Card padding="md">
+    <Card>
       <div className="product">
         <div className="product__image"><Icon name={p.category === 'storage' ? 'Battery_full' : p.category === 'panels' ? 'Solar' : 'Inverter'} size={32} /></div>
         <div className="product__info">
           <div className="row">
-            <span className="p6-semibold muted">SUNPOWER</span>
+            <span className="t-caption-strong muted">SUNPOWER</span>
             {p.badge && <Badge tone={p.badge === 'Hot' ? 'error' : 'success'}>{p.badge}</Badge>}
           </div>
-          <span className="p3-semibold">{p.name}</span>
-          <span className="p5-regular muted">{p.specs}</span>
+          <span className="t-body-strong">{p.name}</span>
+          <span className="t-caption muted">{p.specs}</span>
           <StatusDot tone={p.stock === 'In stock' ? 'success' : 'info'}>{p.stock}</StatusDot>
         </div>
       </div>
       <div className="row between">
         <div>
-          <p className="p5-semibold">Price: contact sales</p>
-          <p className="p6-regular muted">per {p.unit}</p>
+          <p className="t-caption-strong">Price: contact sales</p>
+          <p className="t-caption muted">per {p.unit}</p>
         </div>
         <Stepper value={qty} onChange={onQty} label={`Quantity of ${p.name}`} />
       </div>
@@ -56,11 +56,15 @@ function Catalogue({ cart, setCart }: { cart: Cart; setCart: Props['setCart'] })
           { value: 'accessories', label: 'Accessories' },
         ]}
       />
-      <div className="row p5-regular muted"><Icon name="Refresh | Reload" size={18} />Stock on 24/11/2026</div>
+      <div className="row t-caption muted"><Icon name="Refresh | Reload" size={18} />Stock on 24/11/2026</div>
+      <div className="stack">
       {list.map((p) => (
         <ProductCard key={p.id} p={p} qty={cart[p.id] ?? 0} onQty={(n) => setCart((c) => ({ ...c, [p.id]: n }))} />
       ))}
-      {!list.length && <p className="p4-regular muted center">No products match.</p>}
+      </div>
+      {!list.length && (
+        <EmptyState icon="Search" title="No products match" description="Try another SKU, model or category." actionLabel="Clear filters" onAction={() => { setQ(''); setCat('all'); }} />
+      )}
     </div>
   );
 }
@@ -77,11 +81,8 @@ function CartTab({ cart, setCart, nav }: { cart: Cart; setCart: Props['setCart']
     );
   if (!lines.length)
     return (
-      <div className="page empty">
-        <Icon name="Wallet" size={40} />
-        <p className="p3-semibold">Your cart is empty</p>
-        <p className="p5-regular muted">Add products from the catalogue to request a price.</p>
-        <Button variant="secondary" onClick={() => nav.go('buy', 'catalogue')}>Go to catalogue</Button>
+      <div className="page">
+        <EmptyState icon="Wallet" title="Your cart is empty" description="Add products from the catalogue to request a price." actionLabel="Go to catalogue" onAction={() => nav.go('buy', 'catalogue')} />
       </div>
     );
   return (
