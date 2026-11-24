@@ -27,7 +27,7 @@ function SystemsBar() {
 const alertCounts = [
   { label: 'Emergency', value: 1, color: 'var(--color-red-600)' },
   { label: 'Major', value: 5, color: 'var(--color-orange-400)' },
-  { label: 'Minor', value: 5, color: 'var(--color-neutral-400)' },
+  { label: 'Minor', value: 6, color: 'var(--color-neutral-400)' },
 ];
 
 /** Donut with the alerts split by level (Figma "Alerts" card). */
