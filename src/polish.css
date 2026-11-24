@@ -83,3 +83,5 @@ p, .p4-regular, .p5-regular { text-wrap: pretty; }
 
 /* 11. Status colour only for status; brand blue only for actions and current state. */
 .legend .p1-semibold, .alerts-legend .p1-semibold { color: var(--color-text-primary); }
+/* Badge stays on the bell after the larger hit area */
+.header-action .header-action__badge { top: 11px; right: 12px; }
