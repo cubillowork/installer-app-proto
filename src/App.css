@@ -16,8 +16,7 @@
   flex-direction: column;
   overflow: hidden;
   border-radius: 44px;
-  /* App background: background/strong (neutral/200, #e3e3e3) — was background/subtle (neutral/100, #f7f7f7) */
-  background: var(--color-background-strong);
+  background: var(--color-background-subtle);
   box-shadow: var(--shadow-elevation-card), 0 0 0 10px var(--color-neutral-900);
 }
 .status-bar {
