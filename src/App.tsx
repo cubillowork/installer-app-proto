@@ -71,6 +71,17 @@ export default function App() {
   const [tab, setTab] = useState<Record<View, string>>({ installs: 'home', academy: 'learn', partner: 'overview', buy: 'catalogue' });
   const [stack, setStack] = useState<Screen[]>([]);
   const [switcher, setSwitcher] = useState(false);
+  const [closing, setClosing] = useState(false);
+  // Close with a short exit animation before unmounting the sheet.
+  const closeSwitcher = (after?: () => void) => {
+    if (!switcher) return after?.();
+    setClosing(true);
+    window.setTimeout(() => {
+      setSwitcher(false);
+      setClosing(false);
+      after?.();
+    }, 180);
+  };
   const [cart, setCart] = useState<Record<string, number>>({});
 
   const nav: Nav = {
@@ -107,12 +118,12 @@ export default function App() {
           <div className="screen">
             <AppHeader
               title={viewMeta[view].title}
-              onTitleClick={() => setSwitcher((o) => !o)}
-              switcherOpen={switcher}
+              onTitleClick={() => (switcher ? closeSwitcher() : setSwitcher(true))}
+              switcherOpen={switcher && !closing}
               actions={
                 <>
-                  <HeaderAction icon="Notifications | Bell" label="Notifications" badge onClick={() => { setSwitcher(false); nav.push({ name: 'notifications' }); }} />
-                  <HeaderAction icon="Burger Menu" label="Menu" onClick={() => { setSwitcher(false); nav.push({ name: 'menu' }); }} />
+                  <HeaderAction icon="Notifications | Bell" label="Notifications" badge onClick={() => closeSwitcher(() => nav.push({ name: 'notifications' }))} />
+                  <HeaderAction icon="Burger Menu" label="Menu" onClick={() => closeSwitcher(() => nav.push({ name: 'menu' }))} />
                 </>
               }
             />
@@ -124,8 +135,8 @@ export default function App() {
             </main>
             <BottomNav items={items} value={tab[view]} onChange={(t) => setTab((s) => ({ ...s, [view]: t }))} />
 
-            <BottomSheet open={switcher} onClose={() => setSwitcher(false)} from="top" offsetTop={48}>
-              <div className="workspace-switcher">
+            <BottomSheet open={switcher} onClose={() => closeSwitcher()} from="top" offsetTop={48}>
+              <div className={`workspace-switcher${closing ? ' is-closing' : ''}`}>
               {(Object.keys(viewMeta) as View[]).map((v) => (
                 <NavItem
                   key={v}
@@ -134,10 +145,7 @@ export default function App() {
                   title={viewMeta[v].title}
                   description={viewMeta[v].description}
                   selected={v === view}
-                  onClick={() => {
-                    nav.go(v);
-                    setSwitcher(false);
-                  }}
+                  onClick={() => closeSwitcher(() => nav.go(v))}
                 />
               ))}
               </div>

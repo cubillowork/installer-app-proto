@@ -355,3 +355,41 @@
 
 .system__line { position: absolute; width: 1px; background: linear-gradient(rgb(41 41 41 / 0.05), rgb(30 30 30 / 0.2)); pointer-events: none; }
 .system__line--h { height: 1px; background: linear-gradient(90deg, rgb(30 30 30 / 0.2), rgb(41 41 41 / 0.05)); }
+
+/* ===== Workspace switcher motion ===== */
+/* Open: overlay fades in, sheet drops 12px, rows follow one after another */
+.screen .flux-sheet-layer:has(.workspace-switcher) .flux-overlay { animation: ws-fade 200ms ease-out both; }
+.screen .flux-sheet--top:has(.workspace-switcher) { animation: ws-drop 240ms cubic-bezier(0.2, 0.8, 0.2, 1) both; transform-origin: top; }
+.workspace-switcher .flux-nav-item { animation: ws-row 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.workspace-switcher .flux-nav-item:nth-child(1) { animation-delay: 30ms; }
+.workspace-switcher .flux-nav-item:nth-child(2) { animation-delay: 60ms; }
+.workspace-switcher .flux-nav-item:nth-child(3) { animation-delay: 90ms; }
+.workspace-switcher .flux-nav-item:nth-child(4) { animation-delay: 120ms; }
+.workspace-switcher .flux-nav-item__icon { transition: background-color 160ms ease, color 160ms ease, transform 160ms ease; }
+.workspace-switcher .flux-nav-item:active .flux-nav-item__icon { transform: scale(0.94); }
+
+/* Close: reverse, quicker */
+.screen .flux-sheet-layer:has(.workspace-switcher.is-closing) .flux-overlay { animation: ws-fade-out 180ms ease-in both; }
+.screen .flux-sheet--top:has(.workspace-switcher.is-closing) { animation: ws-lift 180ms ease-in both; }
+.workspace-switcher.is-closing .flux-nav-item { animation: none; }
+
+/* Chevron turns when the switcher opens or closes */
+.flux-app-header__title svg { transition: transform 200ms ease; }
+.flux-app-header__title[aria-expanded='true'] svg { animation: ws-flip 200ms ease; }
+.flux-app-header__title[aria-expanded='false'] svg { animation: ws-flip-back 200ms ease; }
+
+/* New workspace / tab content fades in */
+.content > .page { animation: ws-content 220ms ease-out both; }
+
+@keyframes ws-fade { from { opacity: 0; } }
+@keyframes ws-fade-out { to { opacity: 0; } }
+@keyframes ws-drop { from { opacity: 0; transform: translateY(-12px); } }
+@keyframes ws-lift { to { opacity: 0; transform: translateY(-12px); } }
+@keyframes ws-row { from { opacity: 0; transform: translateY(-6px); } }
+@keyframes ws-flip { from { transform: rotate(180deg); } }
+@keyframes ws-flip-back { from { transform: rotate(-180deg); } }
+@keyframes ws-content { from { opacity: 0; transform: translateY(6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .screen .flux-sheet-layer *, .workspace-switcher *, .flux-app-header__title svg, .content > .page { animation: none !important; transition: none !important; }
+}
