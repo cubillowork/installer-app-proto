@@ -201,7 +201,7 @@
   text-align: left;
   cursor: pointer;
 }
-.me-row__text { flex: 1; display: flex; flex-direction: column; }
+.me-row__text { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow-wrap: anywhere; }
 .me__divider { width: 100%; margin: 0; border: none; border-top: 1px solid var(--color-border-default); }
 
 /* Systems — Gen 1 cards (open the Partner Portal) */

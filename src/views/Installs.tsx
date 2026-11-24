@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import {
-  Button, ChipGroup, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, NavItem, SearchField, SectionHeader, StatusDot, Tag,
+  Button, ChipGroup, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, SearchField, SectionHeader, StatusDot, Tag,
 } from 'flux-ds';
 import type { Nav } from '../App';
+import { MenuList, MenuRow } from '../components/MenuRow';
 import { pendingWarranties, registrations, systems, systemsOverview as o } from '../data';
 
 export function InstallsView({ tab, nav }: { tab: string; nav: Nav }) {
@@ -166,16 +167,17 @@ function Systems({ nav }: { nav: Nav }) {
 function Support() {
   return (
     <div className="page">
-      <Card padding="md">
-        <NavItem icon="Help" title="FAQ" description="Answers to common questions" />
-        <NavItem icon="contract" title="Installation guides" description="X5, W10, Reserve and more" />
-        <NavItem icon="Remote Control" title="Remote support" description="Let support access a system" />
-      </Card>
+      <MenuList>
+        <MenuRow icon="Help" title="FAQ" description="Answers to common questions" />
+        <MenuRow icon="contract" title="Installation guides" description="X5, W10, Reserve and more" />
+        <MenuRow icon="Remote Control" title="Remote support" description="Let support access a system" />
+      </MenuList>
+      <hr className="me__divider" />
       <SectionHeader title="Contact us" />
-      <Card padding="md">
-        <ListItem icon="Phone" title="+44 20 4572 6579" description="Mon–Fri, 8:00–18:00" />
-        <ListItem icon="Email" title="PartnerService.UK@sunpowerglobal.com" description="We reply within 1 working day" />
-      </Card>
+      <MenuList>
+        <MenuRow icon="Phone" title="+44 20 4572 6579" description="Mon–Fri, 8:00–18:00" />
+        <MenuRow icon="Email" title="PartnerService.UK@sunpowerglobal.com" description="We reply within 1 working day" />
+      </MenuList>
       <p className="p5-regular muted">Training videos moved to the Academy workspace (tap the title at the top).</p>
     </div>
   );

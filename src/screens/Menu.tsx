@@ -1,20 +1,8 @@
-import { HeaderMobile, Icon, type IconName } from 'flux-ds';
+import { HeaderMobile } from 'flux-ds';
+import { MenuRow } from '../components/MenuRow';
 import type { Nav } from '../App';
 
-// Mobile menu (☰ in the header) — replaces the "Me" tab. Same row style as today's Installer App "Me" screen.
-function MenuRow({ icon, title, description, chevron = true, onClick }: { icon: IconName; title: string; description?: string; chevron?: boolean; onClick?: () => void }) {
-  return (
-    <button type="button" className="me-row" onClick={onClick}>
-      <Icon name={icon} />
-      <span className="me-row__text">
-        <span className="p2-semibold">{title}</span>
-        {description && <span className="p5-regular muted">{description}</span>}
-      </span>
-      {chevron && <Icon name="Arrow right" size={16} />}
-    </button>
-  );
-}
-
+// Mobile menu (☰ in the header) — replaces the "Me" tab.
 export function Menu({ nav }: { nav: Nav }) {
   return (
     <>

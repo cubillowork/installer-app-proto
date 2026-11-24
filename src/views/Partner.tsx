@@ -1,5 +1,6 @@
-import { Badge, Card, CardHeader, Icon, Link, ListItem, NavItem, ProgressBar, Rail, SectionHeader, Tag } from 'flux-ds';
+import { Badge, Card, CardHeader, Icon, Link, ListItem, ProgressBar, Rail, SectionHeader, Tag } from 'flux-ds';
 import { benefits, leads, marketing, news, partner as p } from '../data';
+import { MenuList, MenuRow } from '../components/MenuRow';
 
 export function PartnerView({ tab }: { tab: string }) {
   if (tab === 'leads') return <Leads />;
@@ -85,14 +86,13 @@ function Leads() {
 function Marketing() {
   return (
     <div className="page">
-      <Card padding="md">
+      <MenuList>
         {marketing.map((m) => (
-          <NavItem key={m.title} icon={m.icon} title={m.title} description={m.description} />
+          <MenuRow key={m.title} icon={m.icon} title={m.title} description={m.description} />
         ))}
-      </Card>
-      <Card padding="md">
-        <ListItem icon="Lock" title="Co-funded campaigns" description="Available at Premier tier" trailing={<Badge>Premier</Badge>} />
-      </Card>
+        <hr className="me__divider" />
+        <MenuRow icon="Lock" title="Co-funded campaigns" description="Available at Premier tier" trailing={<Badge>Premier</Badge>} />
+      </MenuList>
     </div>
   );
 }
