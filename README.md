@@ -4,7 +4,7 @@ Clickable prototype of the SunPower Installer App with the Partner Portal featur
 
 Live: **https://cubillowork.github.io/installer-app-proto/**
 
-Built with **[Flux DS](https://github.com/cubillowork/flux-ds)** (`flux-ds` v0.1.0) — every colour, size and text style comes from Flux tokens.
+Built with **[Flux DS](https://github.com/cubillowork/flux-ds)** (`flux-ds` v0.2.0) — every colour, size and text style comes from Flux tokens.
 
 ## Screens
 

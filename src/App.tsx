@@ -11,7 +11,7 @@ export default function App() {
           <Icon name="Notifications | Bell" />
         </header>
         <main className="phone-body">
-          <p className="p3-regular">Installer App × Partner Portal — prototype built with Flux DS v0.1.0.</p>
+          <p className="p3-regular">Installer App × Partner Portal — prototype built with Flux DS v0.2.0.</p>
           <Button size="big" icon="Add" fullWidth>
             New installation
           </Button>
