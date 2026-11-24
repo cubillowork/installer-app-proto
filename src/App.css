@@ -157,11 +157,6 @@
 .legend-label { display: inline-flex; align-items: center; gap: 6px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
 
-/* Workspace switcher (Figma 71:2558): no check, no arrows; current workspace = dark icon tile */
-.workspace-switcher .flux-nav-item__check { display: none; }
-.workspace-switcher .flux-nav-item__icon { border-radius: 2px; background: var(--color-background-strong); color: var(--color-text-primary); }
-.workspace-switcher .flux-nav-item.is-selected .flux-nav-item__icon { background: var(--color-neutral-900); color: var(--color-text-white); }
-.workspace-switcher .flux-nav-item__description { font-size: 13px; line-height: 16px; }
 
 /* Me (Installs) — white page, rows: icon 24 · title p2 semibold · description p5 · arrow 16, gap 32 */
 .me-content { background: var(--color-background-default); }
@@ -187,3 +182,18 @@
 .gen1-card { display: flex; align-items: center; gap: var(--spacing-md); }
 .gen1-card__text { flex: 1; display: flex; flex-direction: column; }
 .gen1-card__note { color: var(--color-text-link); }
+
+/* Header actions — 24×24 icons, 16px apart (Figma 71:3559) */
+.header-action { display: inline-flex; padding: 0; border: none; background: none; color: var(--color-text-primary); cursor: pointer; }
+.header-action:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+
+/* Workspace switcher (Figma 71:2558) — subtle background, padding 8/24/16; rows 69px; 40px tile radius 4;
+   current workspace = brand tile with white icon, others = neutral/200; title 15/19 semibold, description 12/15 */
+.screen .flux-sheet--top:has(.workspace-switcher) { background: var(--color-background-subtle); padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-lg); }
+.workspace-switcher .flux-nav-item { gap: 14px; padding: 14px 0; }
+.workspace-switcher .flux-nav-item__check { display: none; }
+.workspace-switcher .flux-nav-item__icon { border-radius: var(--radius-sm); background: var(--color-background-strong); color: var(--color-text-primary); }
+.workspace-switcher .flux-nav-item.is-selected .flux-nav-item__icon { background: var(--color-interactive-primary); color: var(--color-text-white); }
+.workspace-switcher .flux-nav-item__content { gap: 2px; }
+.workspace-switcher .flux-nav-item__content .p2-semibold { font-size: 15px; line-height: 19px; }
+.workspace-switcher .flux-nav-item__description { font-size: 12px; line-height: 15px; }

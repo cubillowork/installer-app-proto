@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppHeader, BottomNav, BottomSheet, IconButton, NavItem, type BottomNavItem, type IconName } from 'flux-ds';
+import { AppHeader, BottomNav, BottomSheet, Icon, NavItem, type BottomNavItem, type IconName } from 'flux-ds';
 import { InstallsView } from './views/Installs';
 import { AcademyView } from './views/Academy';
 import { PartnerView } from './views/Partner';
@@ -54,6 +54,15 @@ export type Nav = {
   back: () => void;
 };
 
+/** Header icon, 24×24 as in Figma (Flux IconButton is 20×20 with an 18px icon). */
+function HeaderAction({ icon, label, onClick }: { icon: IconName; label: string; onClick?: () => void }) {
+  return (
+    <button type="button" className="header-action" aria-label={label} title={label} onClick={onClick}>
+      <Icon name={icon} size={24} />
+    </button>
+  );
+}
+
 export default function App() {
   const [view, setView] = useState<View>('installs');
   const [tab, setTab] = useState<Record<View, string>>({ installs: 'home', academy: 'learn', partner: 'overview', buy: 'catalogue' });
@@ -97,8 +106,8 @@ export default function App() {
               switcherOpen={switcher}
               actions={
                 <>
-                  <IconButton icon="Notifications | Bell" label="Notifications" variant="secondary" />
-                  <IconButton icon="Burger Menu" label="Menu" variant="secondary" onClick={() => { setSwitcher(false); nav.push({ name: 'menu' }); }} />
+                  <HeaderAction icon="Notifications | Bell" label="Notifications" />
+                  <HeaderAction icon="Burger Menu" label="Menu" onClick={() => { setSwitcher(false); nav.push({ name: 'menu' }); }} />
                 </>
               }
             />
