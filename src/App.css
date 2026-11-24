@@ -101,22 +101,47 @@
 .event-title { min-height: 32px; }
 .news-card { width: 240px; }
 
-/* Partner tier card */
+/* Partner tier card (Figma 71:3313) — gradient #123678 → #0c1e46, radius 8, padding 16, gap 16.
+   The two gradient colours are not Flux tokens yet (closest: blue/600, blue/700). */
 .tier-card {
+  --tier-from: #123678;
+  --tier-to: #0c1e46;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  width: 100%;
   padding: var(--spacing-lg);
-  border-radius: var(--radius-sm);
-  background: var(--color-blue-500);
-  color: var(--color-text-white);
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, var(--tier-from), var(--tier-to));
   box-shadow: var(--shadow-elevation-card);
+  color: var(--color-text-white);
+  font-family: var(--font-family);
+  text-align: left;
+  cursor: pointer;
 }
-.tier-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--color-blue-400); }
-.tier-progress { display: flex; flex-direction: column; gap: var(--spacing-sm); }
-.tier-card .flux-progress-bar { background: var(--color-blue-400); }
+.tier-card__top { display: flex; align-items: center; gap: var(--spacing-md); }
+.tier-card__badge {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.15);
+  border: 1px dashed rgb(255 255 255 / 0.5);
+}
+.tier-card__name { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.tier-card__eyebrow { font-size: 12px; line-height: 15px; opacity: 0.75; }
+.tier-card__tier { font-size: 20px; line-height: 25px; font-weight: 600; }
+.tier-card__progress { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.tier-card__progress .row { gap: 6px; }
+.tier-card__pct { font-size: 22px; line-height: 28px; font-weight: 600; }
+.tier-card__to { font-size: 14px; line-height: 18px; opacity: 0.85; }
+.tier-card__meta { font-size: 12px; line-height: 15px; opacity: 0.85; }
+.tier-card .flux-progress-bar { background: rgb(255 255 255 / 0.2); }
 .tier-card .flux-progress-bar__fill { background: var(--color-text-white); }
-.tier-unlocks { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-top: var(--spacing-md); border-top: 1px solid var(--color-blue-400); }
+.tier-card__unlocks { display: flex; flex-direction: column; gap: var(--spacing-xs); padding-top: var(--spacing-md); border-top: 1px solid rgb(255 255 255 / 0.2); }
+.tier-card__unlocks-label { font-size: 11px; line-height: 14px; opacity: 0.7; }
+.tier-card__unlocks-text { font-size: 12px; line-height: 15px; font-weight: 600; }
 
 /* Buy products */
 .product { display: flex; gap: var(--spacing-md); }

@@ -15,29 +15,29 @@ function Overview() {
         <p className="p5-regular muted">{p.since}</p>
       </div>
 
-      {/* Partner tier card — the coloured card from the Figma mockup */}
-      <div className="tier-card">
-        <div className="row">
-          <div className="tier-icon"><Icon name="agreement" /></div>
-          <div className="grow">
-            <p className="p5-regular">Partner current tier</p>
-            <p className="h3">{p.tier}</p>
-          </div>
-          <Icon name="Information" size={20} />
+      {/* Partner tier card (Figma 71:3313) */}
+      <button type="button" className="tier-card">
+        <div className="tier-card__top">
+          <span className="tier-card__badge" aria-hidden="true" />
+          <span className="tier-card__name">
+            <span className="tier-card__eyebrow">Partner current tier</span>
+            <span className="tier-card__tier">{p.tier}</span>
+          </span>
+          <Icon name="Arrow right" />
         </div>
-        <div className="tier-progress">
+        <div className="tier-card__progress">
           <div className="row baseline">
-            <span className="h2">{p.progress}%</span>
-            <span className="p4-regular">to {p.next}</span>
+            <span className="tier-card__pct">{p.progress}%</span>
+            <span className="tier-card__to">to {p.next}</span>
           </div>
           <ProgressBar value={p.progress} label={`Progress to ${p.next}`} />
-          <span className="p5-regular">{p.progressText}</span>
+          <span className="tier-card__meta">{p.progressText}</span>
         </div>
-        <div className="tier-unlocks">
-          <span className="p5-semibold">Next tier unlocks</span>
-          <span className="p5-regular">{p.unlocks}</span>
+        <div className="tier-card__unlocks">
+          <span className="tier-card__unlocks-label">Next tier unlocks</span>
+          <span className="tier-card__unlocks-text">{p.unlocks}</span>
         </div>
-      </div>
+      </button>
 
       <Card padding="none">
         <CardHeader title="Your benefits" onClick={() => {}} />
