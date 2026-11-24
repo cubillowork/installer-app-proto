@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import {
-  Button, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, NavItem, SearchField, SectionHeader, StatusDot, Tag,
+  Button, ChipGroup, Card, CardBody, CardHeader, Icon, KeyValue, Link, ListItem, NavItem, SearchField, SectionHeader, StatusDot, Tag,
 } from 'flux-ds';
 import type { IconName } from 'flux-ds';
 import type { Nav } from '../App';
@@ -114,18 +115,52 @@ function Home({ nav }: { nav: Nav }) {
 }
 
 function Systems({ nav }: { nav: Nav }) {
+  const [gen, setGen] = useState<'gen2' | 'gen1'>('gen2');
   return (
     <div className="page">
-      <SearchField placeholder="Search system, address or ID" aria-label="Search systems" />
-      {systems.map((s) => (
-        <Card key={s.id} onClick={() => nav.push({ name: 'system', id: s.id })}>
-          <span className="p2-semibold">{s.name}</span>
-          <div className="row">{s.tags.map((t) => <Tag key={t} status={t} />)}</div>
-          <div className="row p5-regular"><Icon name="Location" size={18} />{s.address}</div>
-          <KeyValue label="Installed on" value={s.installed} />
-          <KeyValue label="Type" value={s.type} />
-        </Card>
-      ))}
+      <ChipGroup
+        label="System generation"
+        value={gen}
+        onChange={setGen}
+        options={[
+          { value: 'gen2', label: 'Gen 2' },
+          { value: 'gen1', label: 'Gen 1' },
+        ]}
+      />
+      {gen === 'gen1' ? (
+        <>
+          <p className="p4-regular muted">Gen 1 systems are managed in the Partner Portal.</p>
+          {[
+            { name: 'SunPower Reserve', description: 'Monitor and manage Reserve systems', icon: 'Battery_full' as const },
+            { name: 'SunPower Drive', description: 'Monitor and manage Drive systems', icon: 'Power | Energy' as const },
+          ].map((g) => (
+            <Card key={g.name} onClick={() => {}}>
+              <div className="gen1-card">
+                <Icon name={g.icon} />
+                <span className="gen1-card__text">
+                  <span className="p2-semibold">{g.name}</span>
+                  <span className="p5-regular muted">{g.description}</span>
+                </span>
+                <Icon name="Link_external" size={20} />
+              </div>
+              <span className="p5-semibold gen1-card__note">Opens the Partner Portal</span>
+            </Card>
+          ))}
+        </>
+      ) : (
+        <>
+          <SearchField placeholder="Search system, address or ID" aria-label="Search systems" />
+          {systems.map((s) => (
+            <Card key={s.id} onClick={() => nav.push({ name: 'system', id: s.id })}>
+              <span className="p2-semibold">{s.name}</span>
+              <div className="row">{s.tags.map((t) => <Tag key={t} status={t} />)}</div>
+              <div className="row p5-regular"><Icon name="Location" size={18} />{s.address}</div>
+              <KeyValue label="Installed on" value={s.installed} />
+              <KeyValue label="Type" value={s.type} />
+            </Card>
+          ))}
+        </>
+      )}
     </div>
   );
 }
