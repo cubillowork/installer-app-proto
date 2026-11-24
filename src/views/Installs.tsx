@@ -164,6 +164,31 @@ function Systems({ nav }: { nav: Nav }) {
   );
 }
 
+/** Contact card — style from the Consumer App (Figma ⚡️ Consumer App, node 2602:37859). */
+function ContactCard() {
+  const rows = [
+    { icon: 'Phone' as const, text: '+44 20 4572 6579', sub: 'Mon–Fri, 8:00–18:00', cta: 'Call', href: 'tel:+442045726579' },
+    { icon: 'Email' as const, text: 'PartnerService.UK@sunpowerglobal.com', sub: 'We reply within 1 working day', cta: 'Email', href: 'mailto:PartnerService.UK@sunpowerglobal.com' },
+  ];
+  return (
+    <section className="contact-card">
+      <h2 className="h4">Contact us</h2>
+      {rows.map((r) => (
+        <div key={r.cta} className="contact-card__row">
+          <span className="contact-card__icon"><Icon name={r.icon} size={16} /></span>
+          <span className="contact-card__text">
+            <span className="p4-regular">{r.text}</span>
+            <span className="p5-regular muted">{r.sub}</span>
+          </span>
+          <a className="flux-button flux-button--primary flux-button--medium" href={r.href}>
+            <span>{r.cta}</span>
+          </a>
+        </div>
+      ))}
+    </section>
+  );
+}
+
 function Support() {
   return (
     <div className="page">
@@ -172,12 +197,7 @@ function Support() {
         <MenuRow icon="contract" title="Installation guides" description="X5, W10, Reserve and more" />
         <MenuRow icon="Remote Control" title="Remote support" description="Let support access a system" />
       </MenuList>
-      <hr className="me__divider" />
-      <SectionHeader title="Contact us" />
-      <MenuList>
-        <MenuRow icon="Phone" title="+44 20 4572 6579" description="Mon–Fri, 8:00–18:00" />
-        <MenuRow icon="Email" title="PartnerService.UK@sunpowerglobal.com" description="We reply within 1 working day" />
-      </MenuList>
+      <ContactCard />
       <p className="p5-regular muted">Training videos moved to the Academy workspace (tap the title at the top).</p>
     </div>
   );
